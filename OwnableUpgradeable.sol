@@ -1,11 +1,21 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.10;
+pragma solidity 0.8.10;
 
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+
 /**
  * @title OwnableUpgradeable
- * @dev The OwnableUpgradeable contract has an owner address, and provides basic authorization control
- * functions, this simplifies the implementation of "user permissions".
+ * @dev The contract provides a basic access control mechanism, where there is
+ * an account (an owner) that can be granted exclusive access to specific
+ * functions.
+ *
+ * By default, the owner account will be the one that deploys the contract.
+ * This can later be changed through a two-step process:
+ * {transferOwnership, claimOwnership}
+ *
+ * The contract is used through inheritance. It will make available the modifier
+ * `onlyOwner`, which can be applied to functions to restrict their use to the
+ * owner.
  */
 contract OwnableUpgradeable is Initializable {
     address private _owner;
@@ -17,8 +27,8 @@ contract OwnableUpgradeable is Initializable {
     );
 
     /**
-     * @dev The Ownable constructor sets the original `owner` of the contract to the sender
-     * account.
+     * @dev The contract constructor that sets the original `owner` of the
+     * contract to the sender account.
      */
     function initialize() internal onlyInitializing {
         _owner = msg.sender;
